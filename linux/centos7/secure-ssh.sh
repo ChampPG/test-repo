@@ -6,10 +6,12 @@
 #adds a public key from the local repo or culed from the remote repo
 #removes roots ability to ssh in
 
-$uname = "test1"
-$DIR = "/home/$uname"
+$uname=$1
+$DIR="/home/$uname"
+ssh sys265@docker01-paul
 if [-d "$DIR"]
 then
+    exit
     ssh $uname@docker01-paul
 else
     useradd -m -d /home/$uname -s /bin/bash $uname
@@ -22,4 +24,5 @@ else
     chown $uname:$uname /home/$uname/.ssh
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     /etc/init.d/ssh restart
+    exit
     ssh $uname@docker01-paul
