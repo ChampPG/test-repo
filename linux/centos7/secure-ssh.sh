@@ -1,6 +1,6 @@
 #!/bin/bash
 $name = $1
-ssh-keygen -t rsa -C "$name" -f $name.pub
+echo -e "\n\n\n" | ssh-keygen -t rsa -N "$name" -f $name.pub
 scp /home/$USER/.ssh/id_rsa.pub sys265@docker01-paul:
 
 ssh sys265@docker01-paul
