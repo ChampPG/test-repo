@@ -5,6 +5,7 @@ echo "user $1"
 if [ -d "/home/$1/.ssh" ]
 then
     echo "Dir is there"
+    cd /home/root/test-repo
     git pull
     sudo cp /home/$USER/test-repo/linux/public-keys/id_rsa.pub /home/$1/.ssh/authorized_keys
     chmod 700 /home/$1/.ssh
@@ -15,6 +16,7 @@ else
     echo "Dir isn't there"
     sudo useradd -m -d /home/$1 -s /bin/bash $1
     sudo mkdir -p /home/$1/.ssh
+    cd /home/root/test-repo
     git pull
     sudo cp /home/$USER/test-repo/linux/public-keys/id_rsa.pub /home/$1/.ssh/authorized_keys
     sudo chmod 700 /home/$1/.ssh
