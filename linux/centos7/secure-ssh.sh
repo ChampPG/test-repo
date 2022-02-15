@@ -4,7 +4,8 @@ $name = $1
 if [ -d "/home/$name/.ssh"]
 then
     cd /home/$name
-    cp ./home/sys265/id_rsa.pub /home/$name/.ssh/authorized_keys
+    https://github.com/ChampPG/test-repo/linux/public-keys
+    cp ./home/$uname/linux/public-keys/id_rsa.pub /home/$name/.ssh/authorized_keys
     chmod 700 /home/$name/.ssh
     chmod 600 /home/$name/.ssh/authorized_keys
     chown $uname:$name /home/$name/.ssh
@@ -13,13 +14,13 @@ else
     useradd -m -d /home/$name -s /bin/bash $name
     mkdir -p /home/$name/.ssh
     cd /home/$name
-    cp ./home/sys265/id_rsa.pub /home/$name/.ssh/authorized_keys
+    git clone https://github.com/ChampPG/test-repo/tree/main/linux/public-keys
+    cp ./home/$uname/linux/public-keys/id_rsa.pub /home/$name/.ssh/authorized_keys
     chmod 700 /home/$name/.ssh
     chmod 600 /home/$name/.ssh/authorized_keys
     chown $uname:$name /home/$name/.ssh
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     /etc/init.d/ssh restart
-    
     echo "you're all set"
 
 
