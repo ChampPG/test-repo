@@ -1,7 +1,8 @@
 #!/bin/bash
 $name = $1
 echo -e "\n\n\n" | ssh-keygen -t rsa -N "$name" -f $name.pub
-echo -e "MrSmith!2" | scp /home/$USER/.ssh/id_rsa.pub sys265@docker01-paul:
+scp /home/$USER/.ssh/id_rsa.pub sys265@docker01-paul:
+echo -e "MrSmith!2"
 
 ssh sys265@docker01-paul
 
