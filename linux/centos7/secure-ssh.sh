@@ -17,7 +17,7 @@ else
     useradd -m -d /home/$1 -s /bin/bash $1
     mkdir -p /home/$1/.ssh
     cd /home/$1
-    git clone https://github.com/ChampPG/test-repo/tree/main/linux/public-keys
+    git clone https://github.com/ChampPG/test-repo/linux/public-keys
     cp /home/$1/linux/public-keys/id_rsa.pub /home/$1/.ssh/authorized_keys
     chmod 700 /home/$1/.ssh
     chmod 600 /home/$1/.ssh/authorized_keys
