@@ -7,7 +7,7 @@
 #removes roots ability to ssh in
 
 $name = $1
-ssh-keygen -t rsa -c "$name"
+ssh-keygen -t rsa -C $name
 scp /home/$USER/.ssh/id_rsa.pub sys265@docker01-paul:
 
 ssh sys265@docker01-paul
