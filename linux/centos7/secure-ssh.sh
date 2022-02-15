@@ -1,13 +1,6 @@
 #!/bin/bash
-
-#secure-ssh.sh
-#author Paul
-#creates a new ssh user using $1 parameter
-#adds a public key from the local repo or culed from the remote repo
-#removes roots ability to ssh in
-
 $name = $1
-ssh-keygen -t rsa -C $name
+ssh-keygen -t rsa -C "$name"
 scp /home/$USER/.ssh/id_rsa.pub sys265@docker01-paul:
 
 ssh sys265@docker01-paul
@@ -28,3 +21,10 @@ else
     /etc/init.d/ssh restart
     exit
     ssh $name@docker01-paul
+
+
+#secure-ssh.sh
+#author Paul
+#creates a new ssh user using $1 parameter
+#adds a public key from the local repo or culed from the remote repo
+#removes roots ability to ssh in
