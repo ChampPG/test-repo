@@ -1,17 +1,17 @@
 #!/bin/bash
 $name = $1
-echo -e "\n\n\n" | ssh-keygen -t rsa -N "$name" -f $name.pub
-ssh-copy-id -i ~/.ssh/id_rsa.pub paul@docker01-paul
-
-ssh sys265@docker01-paul
 
 if [ -d "/home/$name/.ssh"]
 then
-    exit
-    ssh $name@docker01-paul
+    cd /home/$name
+    cp ./home/sys265/id_rsa.pub /home/$name/.ssh/authorized_keys
+    chmod 700 /home/$name/.ssh
+    chmod 600 /home/$name/.ssh/authorized_keys
+    chown $uname:$name /home/$name/.ssh
+    echo "You're all set!"
 else
     useradd -m -d /home/$name -s /bin/bash $name
-    mkdir /home/$name/.ssh
+    mkdir -p /home/$name/.ssh
     cd /home/$name
     cp ./home/sys265/id_rsa.pub /home/$name/.ssh/authorized_keys
     chmod 700 /home/$name/.ssh
@@ -19,8 +19,8 @@ else
     chown $uname:$name /home/$name/.ssh
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     /etc/init.d/ssh restart
-    exit
-    ssh $name@docker01-paul
+    
+    echo "you're all set"
 
 
 #secure-ssh.sh
