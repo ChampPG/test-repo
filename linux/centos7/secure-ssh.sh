@@ -4,7 +4,7 @@ $name = $1
 if [ -d "/home/$name/.ssh"]
 then
     cd /home/$name
-    https://github.com/ChampPG/test-repo/linux/public-keys
+    git clone https://github.com/ChampPG/test-repo/linux/public-keys
     cp ./home/$uname/linux/public-keys/id_rsa.pub /home/$name/.ssh/authorized_keys
     chmod 700 /home/$name/.ssh
     chmod 600 /home/$name/.ssh/authorized_keys
