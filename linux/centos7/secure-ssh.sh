@@ -6,8 +6,8 @@
 #adds a public key from the local repo or culed from the remote repo
 #removes roots ability to ssh in
 
-$uname == $test1
-$DIR == $/home/$uname
+$uname = $test1
+$DIR = $/home/$uname
 if [-d "$DIR"]
 then
     ssh $uname@docker01-paul
