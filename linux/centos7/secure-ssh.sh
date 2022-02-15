@@ -25,7 +25,7 @@ else
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     /etc/init.d/ssh restart
     echo "you're all set"
-
+fi
 
 #secure-ssh.sh
 #author Paul
