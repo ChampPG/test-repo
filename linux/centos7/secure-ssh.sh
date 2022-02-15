@@ -7,8 +7,8 @@
 #removes roots ability to ssh in
 
 $uname=$1
-$DIR="/home/$uname"
 ssh sys265@docker01-paul
+$DIR="/home/$uname"
 if [-d "$DIR"]
 then
     exit
