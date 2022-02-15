@@ -1,7 +1,7 @@
 #!/bin/bash
 $name = $1
 
-if [ -d "/home/$name/.ssh"]
+if [ -d "/home/$name/.ssh" ]
 then
     cd /home/$name
     git clone https://github.com/ChampPG/test-repo/linux/public-keys
