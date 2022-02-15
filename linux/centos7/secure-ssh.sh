@@ -1,5 +1,5 @@
 #!/bin/bash
-$name = $1
+$name=$1
 
 if [ -d "/home/$name/.ssh" ]
 then
