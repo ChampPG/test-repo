@@ -1,24 +1,24 @@
 #!/bin/bash
-$name=$1
 
-if [ -d "/home/$name/.ssh" ]
+
+if [ -d "/home/$1/.ssh" ]
 then
-    cd /home/$name
+    cd /home/$1
     git clone https://github.com/ChampPG/test-repo/linux/public-keys
-    cp ./home/$uname/linux/public-keys/id_rsa.pub /home/$name/.ssh/authorized_keys
-    chmod 700 /home/$name/.ssh
-    chmod 600 /home/$name/.ssh/authorized_keys
-    chown $uname:$name /home/$name/.ssh
+    cp ./home/$1/linux/public-keys/id_rsa.pub /home/$1/.ssh/authorized_keys
+    chmod 700 /home/$1/.ssh
+    chmod 600 /home/$1/.ssh/authorized_keys
+    chown $1:$1 /home/$1/.ssh
     echo "You're all set!"
 else
-    useradd -m -d /home/$name -s /bin/bash $name
-    mkdir -p /home/$name/.ssh
-    cd /home/$name
+    useradd -m -d /home/$1 -s /bin/bash $1
+    mkdir -p /home/$1/.ssh
+    cd /home/$1
     git clone https://github.com/ChampPG/test-repo/tree/main/linux/public-keys
-    cp ./home/$uname/linux/public-keys/id_rsa.pub /home/$name/.ssh/authorized_keys
-    chmod 700 /home/$name/.ssh
-    chmod 600 /home/$name/.ssh/authorized_keys
-    chown $uname:$name /home/$name/.ssh
+    cp ./home/$1/linux/public-keys/id_rsa.pub /home/$1/.ssh/authorized_keys
+    chmod 700 /home/$1/.ssh
+    chmod 600 /home/$1/.ssh/authorized_keys
+    chown $1:$1 /home/$1/.ssh
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     /etc/init.d/ssh restart
     echo "you're all set"
