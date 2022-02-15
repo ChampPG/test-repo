@@ -12,12 +12,8 @@ scp /home/$USER/.ssh/id_rsa.pub sys265@docker01-paul:
 
 ssh sys265@docker01-paul
 
-$DIR="/home/$uname"
-if [-d "$DIR"]
+if [ ! -d "/home/$uname/.ssh"]
 then
-    exit
-    ssh $uname@docker01-paul
-else
     useradd -m -d /home/$uname -s /bin/bash $uname
     mkdir /home/$uname/.ssh
     cd /home/$uname
@@ -27,5 +23,8 @@ else
     chown $uname:$uname /home/$uname/.ssh
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
     /etc/init.d/ssh restart
+    exit
+    ssh $uname@docker01-paul
+fi
     exit
     ssh $uname@docker01-paul
