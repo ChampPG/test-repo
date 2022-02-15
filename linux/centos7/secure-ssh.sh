@@ -12,7 +12,7 @@ scp /home/$USER/.ssh/id_rsa.pub sys265@docker01-paul:
 
 ssh sys265@docker01-paul
 
-if [ ! -d "/home/$name/.ssh"]
+if [[ ! -d "/home/$name/.ssh"]]
 then
     useradd -m -d /home/$name -s /bin/bash $name
     mkdir /home/$name/.ssh
