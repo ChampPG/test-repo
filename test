@@ -1,0 +1,49 @@
+Web Server Start:
+
+add sudo user:
+adduser <user>
+passwd <user>
+usermod -aG wheel <wheel>
+
+httpd:
+yum install httpd
+
+firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --permanent --add-port=443/tcp
+firewall-reload
+
+systemctl start httpd
+systemctl status httpd
+
+CA:
+add sudo user:
+adduser <user>
+passwd <user>
+usermod -aG wheel <wheel>
+
+cd /etc/pki/CA
+touch index.txt
+echo 1000 > serial
+
+openssl genrsa -des3 -out private/cakey.pem 2048
+openssl req -new -x509 -days 365 -key private/cakey.pem -out cacert.pem
+
+Web:
+openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
+scp websrv.csr <user>@<ip-ca>:/etc/pki/CA
+
+CA: 
+openssl ca -out websrv.crt -infiles websrv.csr
+scp websrv.crt <user>@<ip-web>
+
+Web: IN SUDO USER HOME
+cp websrv.crt /etc/pki/tls/certs/websrv.crt
+cp websrv.key /etc/pki/tls/private/websrv.key
+
+yum -y install mod_ssl
+
+Now update /etc/httpd/conf.d/ssl.conf
+find SSLCertificateFile
+find SSLCertificateKeyFile
+
+systemctl restart httpd
