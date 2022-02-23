@@ -41,4 +41,5 @@ Now update /etc/httpd/conf.d/ssl.conf
 find SSLCertificateFile
 find SSLCertificateKeyFile
 
+# As root restart httpd
 systemctl restart httpd
