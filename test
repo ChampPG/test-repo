@@ -16,11 +16,6 @@ systemctl start httpd
 systemctl status httpd
 
 ## CA Creation:
-add sudo user:
-adduser <user>
-passwd <user>
-usermod -aG wheel <wheel>
-
 cd /etc/pki/CA
 touch index.txt
 echo 1000 > serial
