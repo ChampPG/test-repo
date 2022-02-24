@@ -2,13 +2,15 @@
 
 #arg 1 is IP Address of CA
 #arg 2 is IP Web Server
-#arg 3 
-#    if 0 setup base web
-#    if 1 setup CA
-#    if 2 finsh web
-#    if 3 setup webpage
 
-if [ $3 = 0 ]
+echo '0 setup base web'
+echo '1 setup CA'
+echo '2 finsh web'
+echo '3 setup webpage'
+
+read select
+
+if [ $select = 0 ]
 then
   echo 'WebServer client setup with CA ssh'
 
@@ -24,7 +26,11 @@ then
   sudo firewall-cmd --reload
   sudo systemctl start httpd
   sudo systemctl status httpd
-  sudo hostnamectl set-hostname paul-webserver
+  
+  # set hostname web
+  echo 'Please enter desired hostname: '
+  read host
+  sudo hostnamectl set-hostname $host
 
   cd /home/paul
   openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
@@ -38,7 +44,7 @@ then
   ssh root@$1
 fi
 
-if [ $3 = 1 ]
+if [ $select = 1 ]
 then
   #prep Cert
   cd /etc/pki/CA
@@ -55,7 +61,7 @@ then
   exit
 fi
 
-if [ $3 = 2 ]
+if [ $select = 2 ]
 then
   #get key and cert copied
   cd /home/paul
@@ -75,7 +81,7 @@ then
   sudo vi /etc/httpd/conf.d/ssl.conf
 fi
 
-if [ $3 = 3 ]
+if [ $select = 3 ]
 then
   # Set up website
   cd /var/www/html
