@@ -23,15 +23,6 @@ then
   sudo firewall-cmd --reload
   sudo systemctl start httpd
   sudo systemctl status httpd
-
-  # Set up website
-  cd /var/www/html
-  sudo echo '<html>' >> index.html
-  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
-  sudo echo '<body>' >> index.html
-  sudo echo '<p>Hi Eastman! </p>' >> index.html
-  sudo echo '</body>' >> index.html
-  sudo echo '</html>' >> index.html
   sudo hostnamectl set-hostname paul-webserver
 
   cd /home/paul
@@ -81,4 +72,17 @@ then
 
   #edit SSLCerticateFile and SSLCertificateKeyFile
   sudo vi /etc/httpd/conf.d/ssl.conf
+fi
+
+if [ $3 = 3 ]
+then
+  # Set up website
+  cd /var/www/html
+  sudo echo '<!DOCTYPE html>' >> index.html
+  sudo echo '<html>' >> index.html
+  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
+  sudo echo '<body>' >> index.html
+  sudo echo '<p>Hi Eastman! </p>' >> index.html
+  sudo echo '</body>' >> index.html
+  sudo echo '</html>' >> index.html
 fi
