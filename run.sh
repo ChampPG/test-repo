@@ -30,9 +30,9 @@ cd /home/paul
 openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
 scp websrv.csr root@$1:/etc/pki/CA
 
-echo "rebooting in 10"
-sleep 10
-reboot
+#echo "rebooting in 10"
+#sleep 10
+#reboot
 
 #ssh CA
 ssh root@$1
