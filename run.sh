@@ -3,41 +3,44 @@
 #arg 1 is IP Address of CA
 #arg 2 is IP Web Server
 
-echo 'WebServer client setup with CA ssh'
+if [$3=0];
+then
+  echo 'WebServer client setup with CA ssh'
 
-scp run.sh root@$1:/root
+  scp run.sh root@$1:/root
 
-# install httpd tmux and tree
-sudo yum install -y httpd tmux tree 
+  # install httpd tmux and tree
+  sudo yum install -y httpd tmux tree 
 
-# httpd install and firewall
-systemctl enable httpd
-sudo firewall-cmd --permanent --add-port=80/tcp
-sudo firewall-cmd --permanent --add-port=443/tcp
-sudo firewall-cmd --reload
-sudo systemctl start httpd
-sudo systemctl status httpd
+  # httpd install and firewall
+  systemctl enable httpd
+  sudo firewall-cmd --permanent --add-port=80/tcp
+  sudo firewall-cmd --permanent --add-port=443/tcp
+  sudo firewall-cmd --reload
+  sudo systemctl start httpd
+  sudo systemctl status httpd
 
-# Set up website
-cd /var/www/html
-sudo echo '<html>' >> index.html
-sudo echo '<head><title>Pauls Website</title></head>' >> index.html
-sudo echo '<body>' >> index.html
-sudo echo '<p>Hi Eastman! </p>' >> index.html
-sudo echo '</body>' >> index.html
-sudo echo '</html>' >> index.html
-sudo hostnamectl set-hostname paul-webserver
+  # Set up website
+  cd /var/www/html
+  sudo echo '<html>' >> index.html
+  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
+  sudo echo '<body>' >> index.html
+  sudo echo '<p>Hi Eastman! </p>' >> index.html
+  sudo echo '</body>' >> index.html
+  sudo echo '</html>' >> index.html
+  sudo hostnamectl set-hostname paul-webserver
 
-cd /home/paul
-openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
-scp websrv.csr root@$1:/etc/pki/CA
+  cd /home/paul
+  openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
+  scp websrv.csr root@$1:/etc/pki/CA
 
-#echo "rebooting in 10"
-#sleep 10
-#reboot
+  #echo "rebooting in 10"
+  #sleep 10
+  #reboot
 
-#ssh CA
-ssh root@$1
+  #ssh CA
+  ssh root@$1
+fi
 
 if [$3=1];
 then
