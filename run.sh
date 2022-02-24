@@ -17,15 +17,16 @@ sudo systemctl start httpd
 sudo systemctl status httpd
 
 # Set up website
-cd /var/www/html
-echo '<html>' >> index.html
-echo '<head><title>Pauls Website</title></head>' >> index.html
-echo '<body>' >> index.html
-echo '<p>Hi Eastman! </p>' >> index.html
-echo '</body>' >> index.html
-echo '</html>' >> index.html
+sudo cd /var/www/html
+sudo echo '<html>' >> index.html
+sudo echo '<head><title>Pauls Website</title></head>' >> index.html
+sudo echo '<body>' >> index.html
+sudo echo '<p>Hi Eastman! </p>' >> index.html
+sudo echo '</body>' >> index.html
+sudo echo '</html>' >> index.html
 sudo hostnamectl set-hostname paul-webserver
 
+cd /home/paul
 openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
 scp websrv.csr root@$1:/etc/pki/CA
 
