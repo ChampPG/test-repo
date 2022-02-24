@@ -76,5 +76,5 @@ then
   sleep 10
 
   #edit SSLCerticateFile and SSLCertificateKeyFile
-  vi /etc/httpd/conf.d/ssl.conf
+  sudo vi /etc/httpd/conf.d/ssl.conf
 fi
