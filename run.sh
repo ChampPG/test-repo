@@ -17,7 +17,7 @@ sudo systemctl start httpd
 sudo systemctl status httpd
 
 # Set up website
-sudo cd /var/www/html
+cd /var/www/html
 sudo echo '<html>' >> index.html
 sudo echo '<head><title>Pauls Website</title></head>' >> index.html
 sudo echo '<body>' >> index.html
