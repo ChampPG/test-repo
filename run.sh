@@ -47,7 +47,7 @@ then
   #prep Cert
   cd /etc/pki/CA
   touch index.txt
-  echo 1000 > serial
+  echo 1004 > serial
 
   #gen CA key and pem
   openssl genrsa -des3 -out private/cakey.pem 2048
