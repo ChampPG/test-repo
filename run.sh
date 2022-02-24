@@ -6,6 +6,7 @@
 #    if 0 setup base web
 #    if 1 setup CA
 #    if 2 finsh web
+#    if 3 setup webpage
 
 if [ $3 = 0 ]
 then
@@ -86,3 +87,8 @@ then
   sudo echo '</body>' >> index.html
   sudo echo '</html>' >> index.html
 fi
+
+#    if 0 setup base web
+#    if 1 setup CA
+#    if 2 finsh web
+#    if 3 setup webpage
