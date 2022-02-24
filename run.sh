@@ -39,7 +39,7 @@ scp websrv.csr root@$1:/etc/pki/CA
 #ssh CA
 ssh root@$1
 
-if [$3=1]
+if [$3=1];
 then
   #prep Cert
   cd /etc/pki/CA
@@ -55,7 +55,7 @@ then
   scp websrv.crt paul@$2
 fi
 
-if[$3=2]
+if[$3=2];
 then
   #get key and cert copied
   cd /home/paul
