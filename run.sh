@@ -2,6 +2,10 @@
 
 #arg 1 is IP Address of CA
 #arg 2 is IP Web Server
+#arg 3 
+#    if 0 setup base web
+#    if 1 setup CA
+#    if 2 finsh web
 
 if [ $3 = 0 ]
 then
