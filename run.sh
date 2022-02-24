@@ -5,7 +5,7 @@
 
 echo 'WebServer client setup with CA ssh'
 
-scp run.sh root@$1:
+scp run.sh root@$1:/root
 
 # install httpd tmux and tree
 sudo yum install -y httpd tmux tree 
