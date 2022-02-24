@@ -55,7 +55,7 @@ then
 
   #gen websrv.crt
   openssl ca -out websrv.crt -infiles websrv.csr
-  scp websrv.crt paul@$2
+  scp websrv.crt paul@$2:
   exit
 fi
 
