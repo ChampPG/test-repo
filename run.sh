@@ -3,7 +3,7 @@
 #arg 1 is IP Address of CA
 #arg 2 is IP Web Server
 
-if [$3=0];
+if [ $3 = 0 ]
 then
   echo 'WebServer client setup with CA ssh'
 
@@ -42,7 +42,7 @@ then
   ssh root@$1
 fi
 
-if [$3=1];
+if [ $3 = 1 ]
 then
   #prep Cert
   cd /etc/pki/CA
@@ -58,7 +58,7 @@ then
   scp websrv.crt paul@$2
 fi
 
-if[$3=2];
+if[ $3 = 2 ]
 then
   #get key and cert copied
   cd /home/paul
