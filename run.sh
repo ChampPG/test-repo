@@ -62,11 +62,11 @@ if [ $3 = 2 ]
 then
   #get key and cert copied
   cd /home/paul
-  cp websrv.crt /etc/pki/tls/certs/websrv.crt
-  cp websrv.key /etc/pki/tls/private/websrv.key
+  sudo cp websrv.crt /etc/pki/tls/certs/websrv.crt
+  sudo cp websrv.key /etc/pki/tls/private/websrv.key
 
   #install mod_ssl for https
-  yum -y install mod_ssl
+  sudo yum -y install mod_ssl
 
   echo 'Now update /etc/httpd/conf.d/ssl.conf'
   echo 'find SSLCertificateFile'
