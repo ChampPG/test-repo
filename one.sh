@@ -8,8 +8,8 @@ read caip
 echo 'enter web IP'
 read webip
 
-ssh root@$caip << EOF
-  ssh root@webip << END
+ssh root@$caip /bin/bash << EOF
+  ssh root@webip /bin/bash << END
     adduser paul
     passwd paul
     usermod -aG paul
@@ -82,8 +82,8 @@ sleep 5
 #edit SSLCerticateFile and SSLCertificateKeyFile
 sudo vi /etc/httpd/conf.d/ssl.conf
 
-ssh root@$caip << EOF
-  ssh root@$webip << END
+ssh root@$caip /bin/bash << EOF
+  ssh root@$webip /bin/bash << END
     # Set up website
     cd /var/www/html
     sudo echo '<!DOCTYPE html>' >> index.html
