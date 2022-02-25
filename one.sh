@@ -60,7 +60,7 @@ else
 
     scp websrv.crt paul@$webip:
     exit
-  EOF
+ EOF
 
   #get key and cert copied
   cd /home/paul
