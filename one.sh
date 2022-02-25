@@ -71,6 +71,7 @@ else
   #edit SSLCerticateFile and SSLCertificateKeyFile
   sudo vi /etc/httpd/conf.d/ssl.conf
   
+  sudo su
   echo "now systemctl restart httpd"
   sudo systemctl restart httpd
 
