@@ -69,7 +69,7 @@ else
   sudo echo '</html>' >> index.html
   
   #edit SSLCerticateFile and SSLCertificateKeyFile
-  vi /etc/httpd/conf.d/ssl.conf
+  sudo vi /etc/httpd/conf.d/ssl.conf
   
   echo "now systemctl restart httpd"
   sudo systemctl restart httpd
