@@ -9,12 +9,12 @@ echo 'enter web IP'
 read webip
 
 ssh root@$caip /bin/bash << EOF
-  ssh root@webip /bin/bash << END
+  ssh root@$webip /bin/bash << EOF
     adduser paul
     passwd paul
     usermod -aG paul
     exit
-  END
+  EOF
   exit
 EOF
 
@@ -83,7 +83,7 @@ sleep 5
 sudo vi /etc/httpd/conf.d/ssl.conf
 
 ssh root@$caip /bin/bash << EOF
-  ssh root@$webip /bin/bash << END
+  ssh root@$webip /bin/bash << EOF
     # Set up website
     cd /var/www/html
     sudo echo '<!DOCTYPE html>' >> index.html
@@ -94,6 +94,6 @@ ssh root@$caip /bin/bash << EOF
     sudo echo '</body>' >> index.html
     sudo echo '</html>' >> index.html
     sudo systemctl restart httpd
- END
+ EOF
 EOF
 echo 'done!'
