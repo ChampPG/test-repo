@@ -92,3 +92,32 @@ else
 
   echo 'done!'
 fi
+
+
+  #ssh CA
+  ssh root@$caip << EOF
+    #prep Cert
+    cd /etc/pki/CA
+    touch index.txt
+
+    #serial for CA
+    echo 'enter serial for CA'
+    read num
+    echo $num > serial
+
+    #gen CA key and pem
+    openssl genrsa -des3 -out private/cakey.pem 2048
+
+    echo "number of days for cert"
+
+    read days
+
+    openssl req -new -x509 -days $days -key private/cakey.pem -out cacert.pem
+
+    #gen websrv.crt
+    openssl ca -out websrv.crt -infiles websrv.csr
+
+
+    scp websrv.crt paul@$webip:
+    exit
+  EOF
