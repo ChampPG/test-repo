@@ -92,6 +92,7 @@ then
   sudo echo '<p>Hi Eastman! </p>' >> index.html
   sudo echo '</body>' >> index.html
   sudo echo '</html>' >> index.html
+  sudo systemctl restart httpd
 fi
 
 #    if 0 setup base web
