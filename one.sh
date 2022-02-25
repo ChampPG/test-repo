@@ -58,7 +58,7 @@ else
   sleep 5
 
   #edit SSLCerticateFile and SSLCertificateKeyFile
-  sudo vi /etc/httpd/conf.d/ssl.conf
+  sudo 
 
   sudo su
   # Set up website
@@ -70,6 +70,10 @@ else
   sudo echo '<p>Hi Eastman! </p>' >> index.html
   sudo echo '</body>' >> index.html
   sudo echo '</html>' >> index.html
+  
+  vi /etc/httpd/conf.d/ssl.conf
+  
+  echo "now systemctl restart httpd"
   sudo systemctl restart httpd
 
   echo 'done!'
