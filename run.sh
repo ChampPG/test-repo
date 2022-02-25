@@ -36,10 +36,6 @@ then
   openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
   scp websrv.csr root@$1:/etc/pki/CA
 
-  #echo "rebooting in 10"
-  #sleep 10
-  #reboot
-
   #ssh CA
   ssh root@$1
 fi
@@ -50,14 +46,19 @@ then
   cd /etc/pki/CA
   touch index.txt
   
+  #serial for CA
   echo 'enter serial for CA'
   read num
-  
   echo $num > serial
 
   #gen CA key and pem
   openssl genrsa -des3 -out private/cakey.pem 2048
-  openssl req -new -x509 -days 365 -key private/cakey.pem -out cacert.pem
+  
+  echo "number of days for cert"
+  
+  read days
+  
+  openssl req -new -x509 -days $days -key private/cakey.pem -out cacert.pem
 
   #gen websrv.crt
   openssl ca -out websrv.crt -infiles websrv.csr
