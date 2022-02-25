@@ -2,88 +2,83 @@
 
 echo 'WebServer client setup with CA ssh'
 
+adduser paul
+passwd paul
+usermod -aG paul
+
 echo 'enter CA IP'
 read caip
 
 echo 'enter web IP'
 read webip
 
-ssh root@$caip /bin/bash << EOF
-  ssh root@$webip /bin/bash << EOF
-    adduser paul
-    passwd paul
-    usermod -aG paul
-    exit
-  EOF
-  exit
-EOF
+ssh root@$caip << EOF
+  ssh paul@$webip << EOF
+    # install httpd tmux and tree
+    sudo yum install -y httpd tmux tree 
 
-# install httpd tmux and tree
-sudo yum install -y httpd tmux tree 
+    # httpd install and firewall
+    systemctl enable httpd
+    sudo firewall-cmd --permanent --add-port=443/tcp
+    sudo firewall-cmd --reload
+    sudo systemctl start httpd
+    sudo systemctl status httpd
 
-# httpd install and firewall
-systemctl enable httpd
-sudo firewall-cmd --permanent --add-port=443/tcp
-sudo firewall-cmd --reload
-sudo systemctl start httpd
-sudo systemctl status httpd
+    # set hostname web
+    echo 'Please enter desired hostname: '
+    read host
+    sudo hostnamectl set-hostname $host
 
-# set hostname web
-echo 'Please enter desired hostname: '
-read host
-sudo hostnamectl set-hostname $host
+    cd /home/paul
+    openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
+    scp websrv.csr root@$1:/etc/pki/CA
 
-cd /home/paul
-openssl req -newkey rsa:2048 -keyout websrv.key -out websrv.csr
-scp websrv.csr root@$1:/etc/pki/CA
+    #ssh CA
+    ssh root@$caip << EOF
+      #prep Cert
+      cd /etc/pki/CA
+      touch index.txt
 
-#ssh CA
-ssh root@$caip /bin/bash << EOF
-  #prep Cert
-  cd /etc/pki/CA
-  touch index.txt
-  
-  #serial for CA
-  echo 'enter serial for CA'
-  read num
-  echo $num > serial
+      #serial for CA
+      echo 'enter serial for CA'
+      read num
+      echo $num > serial
 
-  #gen CA key and pem
-  openssl genrsa -des3 -out private/cakey.pem 2048
-  
-  echo "number of days for cert"
-  
-  read days
-  
-  openssl req -new -x509 -days $days -key private/cakey.pem -out cacert.pem
+      #gen CA key and pem
+      openssl genrsa -des3 -out private/cakey.pem 2048
 
-  #gen websrv.crt
-  openssl ca -out websrv.crt -infiles websrv.csr
-  
-  
-  scp websrv.crt paul@$webip:
-  exit
-EOF
+      echo "number of days for cert"
 
-#get key and cert copied
-cd /home/paul
-sudo cp websrv.crt /etc/pki/tls/certs/websrv.crt
-sudo cp websrv.key /etc/pki/tls/private/websrv.key
+      read days
 
-#install mod_ssl for https
-sudo yum -y install mod_ssl
+      openssl req -new -x509 -days $days -key private/cakey.pem -out cacert.pem
 
-echo 'Now update /etc/httpd/conf.d/ssl.conf'
-echo 'find SSLCertificateFile'
-echo 'find SSLCertificateKeyFile'
-echo 'then restart httpd from root'
-sleep 5
+      #gen websrv.crt
+      openssl ca -out websrv.crt -infiles websrv.csr
 
-#edit SSLCerticateFile and SSLCertificateKeyFile
-sudo vi /etc/httpd/conf.d/ssl.conf
 
-ssh root@$caip /bin/bash << EOF
-  ssh root@$webip /bin/bash << EOF
+      scp websrv.crt paul@$webip:
+      exit
+    EOF
+
+    #get key and cert copied
+    cd /home/paul
+    sudo cp websrv.crt /etc/pki/tls/certs/websrv.crt
+    sudo cp websrv.key /etc/pki/tls/private/websrv.key
+
+    #install mod_ssl for https
+    sudo yum -y install mod_ssl
+
+    echo 'Now update /etc/httpd/conf.d/ssl.conf'
+    echo 'find SSLCertificateFile'
+    echo 'find SSLCertificateKeyFile'
+    echo 'then restart httpd from root'
+    sleep 5
+
+    #edit SSLCerticateFile and SSLCertificateKeyFile
+    sudo vi /etc/httpd/conf.d/ssl.conf
+
+    sudo su
     # Set up website
     cd /var/www/html
     sudo echo '<!DOCTYPE html>' >> index.html
@@ -94,6 +89,7 @@ ssh root@$caip /bin/bash << EOF
     sudo echo '</body>' >> index.html
     sudo echo '</html>' >> index.html
     sudo systemctl restart httpd
- EOF
+
+    echo 'done!'
+  EOF
 EOF
-echo 'done!'
