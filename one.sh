@@ -4,7 +4,7 @@ echo 'WebServer client setup with CA ssh'
 
 adduser paul
 passwd paul
-usermod -aG paul
+usermod -aG wheel paul
 
 echo 'enter CA IP'
 read caip
