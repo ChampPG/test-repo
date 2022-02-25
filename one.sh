@@ -41,7 +41,7 @@ else
   echo "number of days for cert"
   read days
   
-  ssh root@$caip "cd /etc/pki/CA ; touch index.txt ; echo $num > /etc/pki/CA/serial ; openssl genrsa -des3 -out /etc/pki/CA/private/cakey.pem 2048 ; openssl req -new -x509 -days $days -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem; openssl ca -out /etc/pki/CA/websrv.crt -infiles /etc/pki/CA/websrv.csr ; scp /etc/pki/CA/websrv.crt paul@$webip:/home/paul"
+  ssh root@$caip "cd /etc/pki/CA ; touch index.txt ; echo $num > /etc/pki/CA/serial ; openssl genrsa -des3 -out /etc/pki/CA/private/cakey.pem 2048 ; openssl req -new -x509 -days $days -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem ; openssl ca -out /etc/pki/CA/websrv.crt -infiles /etc/pki/CA/websrv.csr ; scp /etc/pki/CA/websrv.crt paul@$webip:/home/paul"
   
   #get key and cert copied
   cd /home/paul
