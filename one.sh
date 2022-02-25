@@ -2,9 +2,21 @@
 
 echo 'WebServer client setup with CA ssh'
 
+echo 'enter CA IP'
 read caip
 
-scp run.sh root@$caip:/root
+echo 'enter web IP'
+read webip
+
+ssh root@$caip << EOF
+  ssh root@webip << END
+    adduser paul
+    passwd paul
+    usermod -aG paul
+    exit
+  END
+  exit
+EOF
 
 # install httpd tmux and tree
 sudo yum install -y httpd tmux tree 
@@ -48,7 +60,7 @@ ssh root@$caip /bin/bash << EOF
   #gen websrv.crt
   openssl ca -out websrv.crt -infiles websrv.csr
   
-  read webip
+  
   scp websrv.crt paul@$webip:
   exit
 EOF
@@ -84,3 +96,4 @@ ssh root@$caip << EOF
     sudo systemctl restart httpd
  END
 EOF
+echo 'done!'
