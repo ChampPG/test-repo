@@ -7,6 +7,7 @@ then
   adduser paul
   passwd paul
   usermod -aG wheel paul
+  cp one.sh /home/paul
 else
   echo 'enter CA IP'
   read caip
