@@ -57,9 +57,6 @@ else
   echo 'then restart httpd from root'
   sleep 5
 
-  #edit SSLCerticateFile and SSLCertificateKeyFile
-  sudo 
-
   sudo su
   # Set up website
   cd /var/www/html
@@ -71,6 +68,7 @@ else
   sudo echo '</body>' >> index.html
   sudo echo '</html>' >> index.html
   
+  #edit SSLCerticateFile and SSLCertificateKeyFile
   vi /etc/httpd/conf.d/ssl.conf
   
   echo "now systemctl restart httpd"
