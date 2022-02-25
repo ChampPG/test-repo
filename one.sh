@@ -14,7 +14,6 @@ else
   echo 'enter web IP'
   read webip
 
-
   # install httpd tmux and tree
   sudo yum install -y httpd tmux tree 
 
@@ -60,7 +59,7 @@ else
 
     scp websrv.crt paul@$webip:
     exit
- EOF
+  EOF
 
   #get key and cert copied
   cd /home/paul
