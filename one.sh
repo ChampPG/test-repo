@@ -46,7 +46,7 @@ else
   user = 'paul'
   
   ssh root@$caip << EOF 
-    scp /etc/pki/CA/websrv.crt $user@$webip:/home/paul
+   scp /etc/pki/CA/websrv.crt $user@$webip:/home/paul
   EOF
   
   #get key and cert copied
