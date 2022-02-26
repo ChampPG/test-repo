@@ -57,17 +57,6 @@ EOF
   echo '/etc/pki/tls/certs/websrv.crt'
   echo $webip
 
-  sudo su
-  # Set up website
-  cd /var/www/html
-  sudo echo '<!DOCTYPE html>' >> index.html
-  sudo echo '<html>' >> index.html
-  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
-  sudo echo '<body>' >> index.html
-  sudo echo '<p>Hi Eastman! </p>' >> index.html
-  sudo echo '</body>' >> index.html
-  sudo echo '</html>' >> index.html
-
   #install mod_ssl for https
   sudo yum -y install mod_ssl
 
@@ -81,6 +70,16 @@ EOF
   sudo vi /etc/httpd/conf.d/ssl.conf
   
   sudo su
+  # Set up website
+  cd /var/www/html
+  sudo echo '<!DOCTYPE html>' >> index.html
+  sudo echo '<html>' >> index.html
+  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
+  sudo echo '<body>' >> index.html
+  sudo echo '<p>Hi Eastman! </p>' >> index.html
+  sudo echo '</body>' >> index.html
+  sudo echo '</html>' >> index.html
+  
   echo "now systemctl restart httpd"
   sudo systemctl restart httpd
 
