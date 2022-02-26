@@ -56,15 +56,6 @@ EOF
   echo '/etc/pki/tls/certs/websrv.crt'
   echo '$webip'
 
-  #install mod_ssl for https
-  sudo yum -y install mod_ssl
-
-  echo 'Now update /etc/httpd/conf.d/ssl.conf'
-  echo 'find SSLCertificateFile'
-  echo 'find SSLCertificateKeyFile'
-  echo 'then restart httpd from root'
-  sleep 5
-
   sudo su
   # Set up website
   cd /var/www/html
@@ -75,6 +66,15 @@ EOF
   sudo echo '<p>Hi Eastman! </p>' >> index.html
   sudo echo '</body>' >> index.html
   sudo echo '</html>' >> index.html
+
+  #install mod_ssl for https
+  sudo yum -y install mod_ssl
+
+  echo 'Now update /etc/httpd/conf.d/ssl.conf'
+  echo 'find SSLCertificateFile'
+  echo 'find SSLCertificateKeyFile'
+  echo 'then restart httpd from root'
+  sleep 5
   
   #edit SSLCerticateFile and SSLCertificateKeyFile
   sudo vi /etc/httpd/conf.d/ssl.conf
