@@ -52,6 +52,9 @@ EOF
   cd /home/paul
   sudo cp websrv.crt /etc/pki/tls/certs/websrv.crt
   sudo cp websrv.key /etc/pki/tls/private/websrv.key
+  
+  echo '/etc/pki/tls/certs/websrv.crt'
+  echo '$webip'
 
   #install mod_ssl for https
   sudo yum -y install mod_ssl
