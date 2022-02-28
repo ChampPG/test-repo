@@ -12,6 +12,7 @@ elif [ $1 = 2 ]
 then
   scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt
 elif [ $1 = 3 ]
+then
   sudo su
   # Set up website
   cd /var/www/html
