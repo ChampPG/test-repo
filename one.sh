@@ -8,7 +8,7 @@ then
   passwd paul
   usermod -aG wheel paul
   cp one.sh /home/paul
-elif [ $1 = 2]
+elif [ $1 = 2 ]
 then
   scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt
 else
