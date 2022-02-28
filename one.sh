@@ -44,6 +44,8 @@ else
   ssh root@$caip "cd /etc/pki/CA ; touch /etc/pki/CA/index.txt ; echo $num > /etc/pki/CA/serial ; openssl genrsa -des3 -out /etc/pki/CA/private/cakey.pem 2048 ; openssl req -new -x509 -days $days -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem ; openssl ca -out /etc/pki/CA/websrv.crt -infiles /etc/pki/CA/websrv.csr"
   
 ssh root@$caip << EOF 
+  echo 'enter web IP'
+  read webip
  scp /etc/pki/CA/websrv.crt paul@$webip:/home/paul
  > /root/.ssh/known_hosts
  scp /etc/pki/CA/websrv.crt paul@$webip:/home/paul
