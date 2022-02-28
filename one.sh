@@ -11,6 +11,22 @@ then
 elif [ $1 = 2 ]
 then
   scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt
+elif [ $1 = 3 ]
+  sudo su
+  # Set up website
+  cd /var/www/html
+  sudo echo '<!DOCTYPE html>' >> index.html
+  sudo echo '<html>' >> index.html
+  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
+  sudo echo '<body>' >> index.html
+  sudo echo '<p>Hi Eastman! </p>' >> index.html
+  sudo echo '</body>' >> index.html
+  sudo echo '</html>' >> index.html
+  
+  echo "now systemctl restart httpd"
+  sudo systemctl restart httpd
+
+  echo 'done!'
 else
   echo 'enter CA IP'
   read caip
@@ -66,25 +82,9 @@ else
   echo 'Now update /etc/httpd/conf.d/ssl.conf'
   echo 'find SSLCertificateFile'
   echo 'find SSLCertificateKeyFile'
-  echo 'then restart httpd from root'
+  echo 'then ./one.sh 3'
   sleep 5
   
   #edit SSLCerticateFile and SSLCertificateKeyFile
   sudo vi /etc/httpd/conf.d/ssl.conf
-  
-  sudo su
-  # Set up website
-  cd /var/www/html
-  sudo echo '<!DOCTYPE html>' >> index.html
-  sudo echo '<html>' >> index.html
-  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
-  sudo echo '<body>' >> index.html
-  sudo echo '<p>Hi Eastman! </p>' >> index.html
-  sudo echo '</body>' >> index.html
-  sudo echo '</html>' >> index.html
-  
-  echo "now systemctl restart httpd"
-  sudo systemctl restart httpd
-
-  echo 'done!'
 fi
