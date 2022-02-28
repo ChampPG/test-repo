@@ -45,7 +45,7 @@ else
 
 ssh root@$caip << EOF
   ssh paul@web << EOF
-  exit
+    exit
   EOF
   scp /etc/pki/CA/websrv.crt paul@web:/home/paul
 EOF
