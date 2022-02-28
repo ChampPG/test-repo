@@ -64,14 +64,18 @@ else
   
   ssh root@$caip "echo "$webip web" > /etc/hosts ; cd /etc/pki/CA ; touch /etc/pki/CA/index.txt ; echo $num > /etc/pki/CA/serial ; openssl genrsa -des3 -out /etc/pki/CA/private/cakey.pem 2048 ; openssl req -new -x509 -days $days -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem ; openssl ca -out /etc/pki/CA/websrv.crt -infiles /etc/pki/CA/websrv.csr"
 
-  echo '/etc/pki/tls/certs/websrv.crt'
-  echo 
-  echo 'scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt'
-  echo 'chmod +x one.sh'
-  echo 'run ./one.sh 2 and then hit enter'
-  read yes
+#   echo '/etc/pki/tls/certs/websrv.crt'
+#   echo 
+#   echo 'scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt'
+#   echo 'chmod +x one.sh'
+#   echo 'run ./one.sh 2 and then hit enter'
+#   read yes
  
+  scp root@$caip:/etc/pki/CA/websrv.crt /home/paul/websrv.crt
   #get key and cert copied
+  
+  read "Hit enter:" pause
+  
   cd /home/paul
   sudo cp websrv.crt /etc/pki/tls/certs/websrv.crt
   sudo cp websrv.key /etc/pki/tls/private/websrv.key
