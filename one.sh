@@ -17,6 +17,8 @@ else
 
   echo 'enter web IP'
   read webip
+  
+  scp /home/paul/one.sh root@$caip:/root/one.sh
 
   # install httpd tmux and tree
   sudo yum install -y httpd tmux tree 
@@ -49,8 +51,8 @@ else
   echo '/etc/pki/tls/certs/websrv.crt'
   echo 
   echo 'scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt'
-  
-  echo 'Run ./one.sh 2 and then hit enter'
+  echo 'chmod +x one.sh'
+  echo 'run ./one.sh 2 and then hit enter'
   read yes
  
   #get key and cert copied
