@@ -8,6 +8,9 @@ then
   passwd paul
   usermod -aG wheel paul
   cp one.sh /home/paul
+elif [ $1 = 2]
+then
+  scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt
 else
   echo 'enter CA IP'
   read caip
@@ -47,7 +50,7 @@ else
   echo 
   echo 'scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt'
   
-  echo 'hit enter after scp'
+  echo 'Run ./one.sh 2 and then hit enter'
   read yes
  
   #get key and cert copied
