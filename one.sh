@@ -36,7 +36,7 @@ then
   echo $certlocal
   echo $certfile
   
-  sed 's|SSLCertificateFile /etc/pki/tls/certs/localhost.crt|SSLCertificateFile /etc/pki/tls/certs/websrv.crt|g' /etc/httpd/conf.d/ssl.conf
+  sed -n 's|SSLCertificateFile /etc/pki/tls/certs/localhost.crt|SSLCertificateFile /etc/pki/tls/certs/websrv.crt|' /etc/httpd/conf.d/ssl.conf
 else
   echo 'enter CA IP'
   read caip
