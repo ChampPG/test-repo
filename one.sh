@@ -30,13 +30,13 @@ then
   echo 'done!'
 elif [ $1 = 4 ]
 then
-  certlocal='SSLCertificateFile /etc/pki/tls/certs/local.crt'
+  certlocal='SSLCertificateFile /etc/pki/tls/certs/localhost.crt'
   certfile='SSLCertificateFile /etc/pki/tls/certs/websrv.crt'
   
   echo $certlocal
   echo $certfile
   
-  sed 's|SSLCertificateFile /etc/pki/tls/certs/local.crt|SSLCertificateFile /etc/pki/tls/certs/websrv.crt|g' /etc/httpd/conf.d/ssl.conf
+  sed 's|SSLCertificateFile /etc/pki/tls/certs/localhost.crt|SSLCertificateFile /etc/pki/tls/certs/websrv.crt|g' /etc/httpd/conf.d/ssl.conf
 else
   echo 'enter CA IP'
   read caip
