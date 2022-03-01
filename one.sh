@@ -77,7 +77,6 @@ else
   echo 'Now update /etc/httpd/conf.d/ssl.conf'
   echo 'find SSLCertificateFile'
   echo 'find SSLCertificateKeyFile'
-  echo 'then sudo ./one.sh 3'
   sleep 5
   
   #edit SSLCerticateFile and SSLCertificateKeyFile
