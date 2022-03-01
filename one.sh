@@ -11,9 +11,6 @@ then
   exit
 elif [ $1 = 2 ]
 then
-  scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt
-elif [ $1 = 3 ]
-then
   # Set up website
   cd /var/www/html
   sudo echo '<!DOCTYPE html>' >> index.html
@@ -89,7 +86,7 @@ else
   sudo sed -i 's|/localhost.crt|/websrv.crt|' /etc/httpd/conf.d/ssl.conf
   sudo sed -i 's|/localhost.key|/websrv.key|' /etc/httpd/conf.d/ssl.conf
   
-  echo 'now run sudo ./one.sh 3'
+  echo 'now run `sudo ./one.sh 2`'
   
   sudo su
   cd /var/www/html
