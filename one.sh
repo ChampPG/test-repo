@@ -93,8 +93,8 @@ else
   #edit SSLCerticateFile and SSLCertificateKeyFile
   #sudo vi /etc/httpd/conf.d/ssl.conf
 
-  sudo sed -e 's/SSLCertificateFile /etc/pki/tls/certs/localhost.crt/SSLCertificateFile /etc/pki/tls/certs/websrv.crt/' /etc/httpd/conf.d/ssl.conf
-  sudo sed -e 's/SSLCertificateKeyFile /etc/pki/tls/private/localhost.key/SSLCertificateKeyFile /etc/pki/tls/private/websrv.key' /etc/httpd/conf.d/ssl.conf
+  sudo sed 's/localhost.crt/websrv.crt/' /etc/httpd/conf.d/ssl.conf
+  sudo sed 's/localhost.key/websrv.key' /etc/httpd/conf.d/ssl.conf
   
   echo 'now run sudo ./one.sh 3'
 fi
