@@ -86,17 +86,4 @@ else
   sudo sed -i 's|/localhost.key|/websrv.key|' /etc/httpd/conf.d/ssl.conf
   
   echo 'now run `sudo ./one.sh 2`'
-  
-  sudo su
-  cd /var/www/html
-  sudo echo '<!DOCTYPE html>' >> index.html
-  sudo echo '<html>' >> index.html
-  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
-  sudo echo '<body>' >> index.html
-  sudo echo '<p>Hi Eastman! </p>' >> index.html
-  sudo echo '</body>' >> index.html
-  sudo echo '</html>' >> index.html
-  
-  echo "now systemctl restart httpd"
-  sudo systemctl restart httpd
 fi
