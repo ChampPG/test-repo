@@ -83,14 +83,17 @@ else
   #install mod_ssl for https
   sudo yum -y install mod_ssl
 
-  echo 'Now update /etc/httpd/conf.d/ssl.conf'
-  echo 'find SSLCertificateFile'
-  echo 'find SSLCertificateKeyFile'
-  echo 'then sudo ./one.sh 3'
-  sleep 5
+  #echo 'Now update /etc/httpd/conf.d/ssl.conf'
+  #echo 'find SSLCertificateFile'
+  #echo 'find SSLCertificateKeyFile'
+  #echo 'then sudo ./one.sh 3'
+  #sleep 5
   
   #edit SSLCerticateFile and SSLCertificateKeyFile
-  sudo vi /etc/httpd/conf.d/ssl.conf
+  #sudo vi /etc/httpd/conf.d/ssl.conf
+
+  sudo sed 's/SSLCertificateFile /etc/pki/tls/certs/localhost.crt/SSLCertificateFile /etc/pki/tls/certs/websrv.crt/' /etc/httpd/conf.d/ssl.conf
+  sudo sed 's/SSLCertificateKeyFile /etc/pki/tls/private/localhost.key/SSLCertificateKeyFile /etc/pki/tls/private/websrv.key' /etc/httpd/conf.d/ssl.conf
   
   echo 'now run sudo ./one.sh 3'
 fi
