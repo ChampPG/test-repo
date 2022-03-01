@@ -17,7 +17,7 @@ then
   sudo echo '<html>' >> index.html
   sudo echo '<head><title>Pauls Website</title></head>' >> index.html
   sudo echo '<body>' >> index.html
-  sudo echo '<p style="border:2px solid DodgerBlue;">Hi Eastman! </p>' >> index.html
+  sudo echo '<p style="border:2px solid Tomato;">Hi Eastman! </p>' >> index.html
   sudo echo '</body>' >> index.html
   sudo echo '</html>' >> index.html
   
