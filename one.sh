@@ -36,8 +36,8 @@ then
   echo $certlocal
   echo $certfile
   
-  sed -n 's|SSLCertificateFile /etc/pki/tls/certs/localhost.crt|SSLCertificateFile /etc/pki/tls/certs/websrv.crt|' /etc/httpd/conf.d/ssl.conf
-  sed -n 's|SSLCertificateKeyFile /etc/pki/tls/private/localhost.key|SSLCertificateKeyFile /etc/pki/tls/private/websrv.key|' /etc/httpd/conf.d/ssl.conf
+  sed -i 's|/localhost.crt|/websrv.crt|' /etc/httpd/conf.d/ssl.conf
+  sed -i 's|/localhost.key|/websrv.key|' /etc/httpd/conf.d/ssl.conf
 else
   echo 'enter CA IP'
   read caip
@@ -101,7 +101,10 @@ else
   sleep 5
   
   #edit SSLCerticateFile and SSLCertificateKeyFile
-  sudo vi /etc/httpd/conf.d/ssl.conf
+  #sudo vi /etc/httpd/conf.d/ssl.conf
+  
+  sed -i 's|/localhost.crt|/websrv.crt|' /etc/httpd/conf.d/ssl.conf
+  sed -i 's|/localhost.key|/websrv.key|' /etc/httpd/conf.d/ssl.conf
   
   echo 'now run sudo ./one.sh 3'
 fi
