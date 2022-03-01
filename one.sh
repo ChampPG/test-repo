@@ -28,16 +28,6 @@ then
   sudo systemctl restart httpd
 
   echo 'done!'
-elif [ $1 = 4 ]
-then
-  certlocal='SSLCertificateFile /etc/pki/tls/certs/localhost.crt'
-  certfile='SSLCertificateFile /etc/pki/tls/certs/websrv.crt'
-  
-  echo $certlocal
-  echo $certfile
-  
-  sudo sed -i 's|/localhost.crt|/websrv.crt|' /etc/httpd/conf.d/ssl.conf
-  sudo sed -i 's|/localhost.key|/websrv.key|' /etc/httpd/conf.d/ssl.conf
 else
   echo 'enter CA IP'
   read caip
