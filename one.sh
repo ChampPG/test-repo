@@ -64,13 +64,6 @@ else
   read days
   
   ssh root@$caip "echo "$webip web" > /etc/hosts ; cd /etc/pki/CA ; touch /etc/pki/CA/index.txt ; echo $num > /etc/pki/CA/serial ; openssl genrsa -des3 -out /etc/pki/CA/private/cakey.pem 2048 ; openssl req -new -x509 -days $days -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem ; openssl ca -out /etc/pki/CA/websrv.crt -infiles /etc/pki/CA/websrv.csr"
-
-  #echo '/etc/pki/tls/certs/websrv.crt'
-  #echo 
-  #echo 'scp /etc/pki/CA/websrv.crt paul@web:/home/paul/websrv.crt'
-  #echo 'chmod +x one.sh'
- # echo 'run ./one.sh 2 and then hit enter'
-#  read yes
  
   scp root@$caip:/etc/pki/CA/websrv.crt /home/paul/websrv.crt
   #get key and cert copied
@@ -97,4 +90,17 @@ else
   sudo sed -i 's|/localhost.key|/websrv.key|' /etc/httpd/conf.d/ssl.conf
   
   echo 'now run sudo ./one.sh 3'
+  
+  sudo su
+  cd /var/www/html
+  sudo echo '<!DOCTYPE html>' >> index.html
+  sudo echo '<html>' >> index.html
+  sudo echo '<head><title>Pauls Website</title></head>' >> index.html
+  sudo echo '<body>' >> index.html
+  sudo echo '<p>Hi Eastman! </p>' >> index.html
+  sudo echo '</body>' >> index.html
+  sudo echo '</html>' >> index.html
+  
+  echo "now systemctl restart httpd"
+  sudo systemctl restart httpd
 fi
